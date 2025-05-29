@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Grand Finale!</title>
+  <style>
+    body {
+      margin: 0;
+      background: #e6ccf5;
+      font-family: 'Comic Sans MS', cursive;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      padding-top: 8vh;
+      color: #6a1b9a;
+    }
+
+    h1 {
+      font-size: 3em;
+      text-shadow: 2px 2px 5px #fff;
+    }
+
+    p {
+      font-size: 1.3em;
+      color: #4a0072;
+      margin-bottom: 2em;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      font-size: 1.2em;
+      background: #ab47bc;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 2em;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #8e24aa;
+    }
+
+    .cake {
+      position: relative;
+      margin: 2em auto;
+      width: 240px;
+      height: 150px;
+      background: #f48fb1;
+      border-radius: 10px;
+      box-shadow: inset 0 -10px #ec407a;
+    }
+
+    .candle {
+      position: absolute;
+      width: 10px;
+      height: 30px;
+      background: #fff59d;
+      border-radius: 2px;
+      top: -40px;
+    }
+
+    .flame {
+      width: 10px;
+      height: 10px;
+      background: orange;
+      border-radius: 50%;
+      position: absolute;
+      top: -10px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      animation: flicker 0.3s infinite alternate;
+      opacity: 1;
+    }
+
+    @keyframes flicker {
+      from { transform: scale(1); opacity: 1; }
+      to { transform: scale(1.2); opacity: 0.7; }
+    }
+
+    .extinguished .flame {
+      animation: none;
+      opacity: 0;
+    }
+
+    .birthday-message {
+      display: none;
+      margin-top: 2em;
+      font-size: 1.5em;
+      color: #ad1457;
+      animation: fadeIn 2s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .border-lights {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      border: 10px dashed white;
+      animation: flash 1s infinite alternate;
+    }
+
+    @keyframes flash {
+      0% { border-color: #ff69b4; }
+      50% { border-color: #ffd700; }
+      100% { border-color: #7fff00; }
+    }
+
+    .balloon {
+      position: absolute;
+      width: 60px;
+      height: 80px;
+      background: radial-gradient(circle, pink 0%, deeppink 100%);
+      border-radius: 60%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      width: 2px;
+      height: 20px;
+      background: #333;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      animation: confettiFall 3s infinite ease-in;
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh); }
+      100% { transform: translateY(-150px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="border-lights"></div>
+
+  <div class="container">
+    <h1>🎂 Time to Make a Wish!</h1>
+    <p>This cake is all yours. Blow out the candles and seal your birthday wish! ✨</p>
+
+    <div class="cake" id="cake">
+      <!-- Multiple candles -->
+      <div class="candle" style="left: 20px;"><div class="flame"></div></div>
+      <div class="candle" style="left: 60px;"><div class="flame"></div></div>
+      <div class="candle" style="left: 110px;"><div class="flame"></div></div>
+      <div class="candle" style="left: 160px;"><div class="flame"></div></div>
+      <div class="candle" style="left: 200px;"><div class="flame"></div></div>
+    </div>
+
+    <button class="btn" onclick="blowCandles()">Blow Out the Candles 🎈</button>
+
+    <div id="wish" class="birthday-message">
+      🎉 Happy Birthday! May your heart be as full as this cake and your smile last longer than the candles. 💖
+    </div>
+  </div>
+
+  <script>
+    // Balloons
+    for (let i = 0; i < 10; i++) {
+      const balloon = document.createElement("div");
+      balloon.classList.add("balloon");
+      balloon.style.left = Math.random() * 100 + "vw";
+      balloon.style.animationDuration = (4 + Math.random() * 3) + "s";
+      document.body.appendChild(balloon);
+    }
+
+    // Confetti
+    for (let i = 0; i < 100; i++) {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.top = Math.random() * -100 + "px";
+      confetti.style.backgroundColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+      confetti.style.animationDuration = (2 + Math.random() * 3) + "s";
+      document.body.appendChild(confetti);
+    }
+
+    // Candle blowout
+    function blowCandles() {
+      const cake = document.getElementById('cake');
+      cake.classList.add('extinguished');
+      const wish = document.getElementById('wish');
+      wish.style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
